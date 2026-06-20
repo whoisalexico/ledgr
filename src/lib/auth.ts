@@ -2,7 +2,7 @@
 
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
-import { getCookie, setCookie, deleteCookie } from "vinxi/http";
+import { getCookie, setCookie, deleteCookie } from "@tanstack/react-start/server";
 
 const SALT_ROUNDS = 12;
 const SESSION_COOKIE = "ledgr_session";

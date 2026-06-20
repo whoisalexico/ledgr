@@ -73,7 +73,7 @@ function Nav() {
         </a>
       </div>
       <Link
-        to="/"
+        to="/login"
         className="bg-ink text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-ink/90 transition-all"
       >
         Начать
@@ -395,7 +395,7 @@ function CTA() {
             Бесплатно, без рекламы и подписок. Pet-проект, который реально работает.
           </p>
           <a
-            href="#preview"
+            href="/register.tsx"
             className="inline-flex items-center gap-2 bg-brand text-white px-8 py-4 rounded-2xl font-bold shadow-brand hover:scale-[1.02] transition-transform"
           >
             Начать бесплатно

@@ -18,12 +18,13 @@ function DashboardPage() {
 
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">{user?.name ?? user?.email}</span>
-            <button
+            <a
+              href={"/"}
               onClick={() => logoutFn()}
               className="text-sm px-3 py-1.5 rounded-md border hover:bg-accent transition-colors"
             >
               Выйти
-            </button>
+            </a>
           </div>
         </div>
       </header>
