@@ -103,7 +103,7 @@ function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#preview"
+            href="/register"
             className="w-full sm:w-auto bg-brand text-white px-8 py-4 rounded-2xl font-bold shadow-brand hover:scale-[1.02] transition-transform inline-flex items-center justify-center gap-2"
           >
             Создать аккаунт

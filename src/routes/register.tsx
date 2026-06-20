@@ -1,9 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { registerSchema, type RegisterInput } from "../lib/auth-schemas";
-import { registerFn } from "./api/auth/register";
+import { registerFn } from "./api/auth/-register.ts";
 
 export const Route = createFileRoute("/register")({
   component: RegisterPage,
@@ -11,6 +11,7 @@ export const Route = createFileRoute("/register")({
 
 function RegisterPage() {
   const [serverError, setServerError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,6 +25,7 @@ function RegisterPage() {
     setServerError(null);
     try {
       await registerFn({ data });
+      await navigate({ to: "/dashboard" });
     } catch (err) {
       if (err instanceof Error) {
         setServerError(err.message);
@@ -34,13 +36,11 @@ function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md space-y-6">
-        {/* Header */}
         <div className="text-center space-y-1">
           <h1 className="text-3xl font-bold tracking-tight font-outfit">Ledgr</h1>
           <p className="text-muted-foreground text-sm">Создайте аккаунт</p>
         </div>
 
-        {/* Card */}
         <div className="rounded-xl border bg-card p-8 shadow-sm space-y-5">
           {serverError && (
             <div className="rounded-md bg-destructive/10 border border-destructive/20 px-4 py-3 text-sm text-destructive">
@@ -49,7 +49,6 @@ function RegisterPage() {
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Name */}
             <div className="space-y-1.5">
               <label htmlFor="name" className="text-sm font-medium leading-none">
                 Имя
@@ -65,7 +64,6 @@ function RegisterPage() {
               {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
             </div>
 
-            {/* Email */}
             <div className="space-y-1.5">
               <label htmlFor="email" className="text-sm font-medium leading-none">
                 Email
@@ -81,7 +79,6 @@ function RegisterPage() {
               {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
             </div>
 
-            {/* Password */}
             <div className="space-y-1.5">
               <label htmlFor="password" className="text-sm font-medium leading-none">
                 Пароль
@@ -99,7 +96,6 @@ function RegisterPage() {
               )}
             </div>
 
-            {/* Confirm Password */}
             <div className="space-y-1.5">
               <label htmlFor="confirmPassword" className="text-sm font-medium leading-none">
                 Повторите пароль

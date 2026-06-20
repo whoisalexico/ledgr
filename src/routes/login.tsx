@@ -1,9 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { loginSchema, type LoginInput } from "../lib/auth-schemas";
-import { loginFn } from "./api/auth/login";
+import { loginFn } from "./api/auth/-login.ts";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
@@ -11,6 +11,7 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const [serverError, setServerError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -24,6 +25,7 @@ function LoginPage() {
     setServerError(null);
     try {
       await loginFn({ data });
+      await navigate({ to: "/dashboard" });
     } catch (err) {
       if (err instanceof Error) {
         setServerError(err.message);
@@ -34,13 +36,11 @@ function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md space-y-6">
-        {/* Header */}
         <div className="text-center space-y-1">
           <h1 className="text-3xl font-bold tracking-tight font-outfit">Ledgr</h1>
           <p className="text-muted-foreground text-sm">Войдите в свой аккаунт</p>
         </div>
 
-        {/* Card */}
         <div className="rounded-xl border bg-card p-8 shadow-sm space-y-5">
           {serverError && (
             <div className="rounded-md bg-destructive/10 border border-destructive/20 px-4 py-3 text-sm text-destructive">
@@ -49,7 +49,6 @@ function LoginPage() {
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Email */}
             <div className="space-y-1.5">
               <label htmlFor="email" className="text-sm font-medium leading-none">
                 Email
@@ -65,7 +64,6 @@ function LoginPage() {
               {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
             </div>
 
-            {/* Password */}
             <div className="space-y-1.5">
               <label htmlFor="password" className="text-sm font-medium leading-none">
                 Пароль

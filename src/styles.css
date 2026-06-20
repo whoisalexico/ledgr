@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "@fontsource/outfit/400.css";
 @import "@fontsource/outfit/600.css";

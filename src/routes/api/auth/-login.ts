@@ -1,8 +1,9 @@
+"use server";
+
 import { createServerFn } from "@tanstack/react-start";
-import { redirect } from "@tanstack/react-router";
-import { prisma } from "@/lib/prisma.ts";
-import { verifyPassword, createSession } from "@/lib/auth.ts";
-import { loginSchema } from "@/lib/auth-schemas.ts";
+import { prisma } from "@/lib/prisma";
+import { verifyPassword, createSession } from "@/lib/auth";
+import { loginSchema } from "@/lib/auth-schemas";
 
 export const loginFn = createServerFn({ method: "POST" })
   .validator((data: unknown) => loginSchema.parse(data))
@@ -11,7 +12,6 @@ export const loginFn = createServerFn({ method: "POST" })
       where: { email: data.email },
     });
 
-    // Намеренно одинаковое сообщение для email и пароля (безопасность)
     const INVALID_MSG = "Неверный email или пароль";
 
     if (!user) {
@@ -26,5 +26,6 @@ export const loginFn = createServerFn({ method: "POST" })
 
     await createSession(user.id);
 
-    throw redirect({ to: "/dashboard" });
+    // Возвращаем результат — редирект на клиенте
+    return { success: true };
   });

@@ -1,6 +1,6 @@
+"use server";
+
 import { createServerFn } from "@tanstack/react-start";
-import { redirect } from "@tanstack/react-router";
-import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { hashPassword, createSession } from "@/lib/auth";
 import { registerSchema } from "@/lib/auth-schemas";
@@ -8,7 +8,6 @@ import { registerSchema } from "@/lib/auth-schemas";
 export const registerFn = createServerFn({ method: "POST" })
   .validator((data: unknown) => registerSchema.parse(data))
   .handler(async ({ data }) => {
-    // Проверяем, не занят ли email
     const existing = await prisma.user.findUnique({
       where: { email: data.email },
     });
@@ -27,8 +26,7 @@ export const registerFn = createServerFn({ method: "POST" })
       },
     });
 
-    // Создаём сессию сразу после регистрации
     await createSession(user.id);
 
-    throw redirect({ to: "/dashboard" });
+    return { success: true };
   });

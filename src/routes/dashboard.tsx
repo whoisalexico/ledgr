@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useAuth } from "../lib/use-auth";
-import { logoutFn } from "./api/auth/logout";
+import { logoutFn } from "./api/auth/-logout.ts";
 
 export const Route = createFileRoute("/dashboard")({
   component: DashboardPage,

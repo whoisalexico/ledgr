@@ -1,3 +1,5 @@
+"use server";
+
 import bcrypt from "bcryptjs";
 import { prisma } from "./prisma";
 import { getCookie, setCookie, deleteCookie } from "vinxi/http";
