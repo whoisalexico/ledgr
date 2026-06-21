@@ -68,7 +68,7 @@ function Nav() {
         <a href="#preview" className="hover:text-brand transition-colors">
           Интерфейс
         </a>
-        <a href="https://github.com" className="hover:text-brand transition-colors">
+        <a href="https://github.com/whoisalexico/ledgr" className="hover:text-brand transition-colors">
           GitHub
         </a>
       </div>
@@ -415,7 +415,7 @@ function Footer() {
         <p className="text-ink-muted text-sm">© 2026 Ledgr · Pet-проект на React</p>
         <div className="flex gap-6 text-sm font-medium text-ink-muted">
           <a
-            href="https://github.com"
+            href="https://github.com/whoisalexico/ledgr"
             className="hover:text-brand inline-flex items-center gap-1.5"
           >
             <Github className="size-4" /> GitHub
