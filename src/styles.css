@@ -176,8 +176,8 @@
     font-size: 0.875rem;
     color: var(--color-ink);
     transition:
-            border-color 0.15s ease,
-            box-shadow 0.15s ease;
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
   }
 
   .ledgr-input::placeholder {

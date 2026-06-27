@@ -15,10 +15,13 @@ model User {
   email     String   @unique
   name      String?
   password  String // bcrypt hash
+  balance   Decimal  @default(0) @db.Decimal(14, 2)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sessions Session[]
+  sessions   Session[]
+  categories Category[]
+  operations Operation[]
 
   @@map("users")
 }
@@ -32,4 +35,48 @@ model Session {
   createdAt DateTime @default(now())
 
   @@map("sessions")
+}
+
+enum OperationType {
+  INCOME
+  EXPENSE
+}
+
+enum Currency {
+  BYN
+  USD
+  EUR
+  RUB
+}
+
+model Category {
+  id        String        @id @default(cuid())
+  name      String
+  type      OperationType
+  userId    String? // null = дефолтная категория, доступна всем пользователям
+  user      User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime      @default(now())
+
+  operations Operation[]
+
+  @@map("categories")
+}
+
+model Operation {
+  id         String        @id @default(cuid())
+  title      String
+  amount     Decimal       @db.Decimal(14, 2) // сумма в исходной валюте операции
+  currency   Currency      @default(BYN) // валюта, в которой введена операция
+  amountByn  Decimal       @default(0) @db.Decimal(14, 2) // сумма, сконвертированная в BYN на момент операции (для баланса/статистики)
+  type       OperationType
+  date       DateTime
+  userId     String
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  @@index([userId, date])
+  @@map("operations")
 }

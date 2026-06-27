@@ -68,7 +68,10 @@ function Nav() {
         <a href="#preview" className="hover:text-brand transition-colors">
           Интерфейс
         </a>
-        <a href="https://github.com/whoisalexico/ledgr" className="hover:text-brand transition-colors">
+        <a
+          href="https://github.com/whoisalexico/ledgr"
+          className="hover:text-brand transition-colors"
+        >
           GitHub
         </a>
       </div>
