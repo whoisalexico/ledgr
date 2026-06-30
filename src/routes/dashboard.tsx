@@ -47,7 +47,6 @@ function DashboardPage() {
     <div className="min-h-screen bg-bg font-sans text-ink antialiased">
       <Topbar email={user?.email} name={user?.name} />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-        {/* Greeting */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <h1 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -68,10 +67,8 @@ function DashboardPage() {
             Новая операция
           </button>
         </div>
-        {/* Stats */}
         <DashboardStats />
         <div className="grid lg:grid-cols-3 gap-4 sm:gap-6">
-          {/* Chart */}
           <section className="lg:col-span-2 bg-white rounded-3xl border border-line p-4 sm:p-6 shadow-sm min-w-0">
             <div className="flex items-center justify-between mb-6">
               <div>
@@ -83,13 +80,11 @@ function DashboardPage() {
             </div>
             <BalanceChart />
           </section>
-          {/* Categories */}
           <section className="bg-white rounded-3xl border border-line p-4 sm:p-6 shadow-sm min-w-0">
             <div className="font-display text-lg font-bold mb-5">Топ категорий</div>
             <TopCategories />
           </section>
         </div>
-        {/* Transactions */}
         <section className="mt-4 sm:mt-6 bg-white rounded-3xl border border-line shadow-sm overflow-hidden">
           <TransactionList />
         </section>
@@ -160,11 +155,9 @@ function DashboardStats() {
   const expenseDelta = data ? formatDelta(data.expenseDeltaPercent) : null;
   const balance = data?.balance ?? 0;
 
-  // Доходы: рост — хорошо (зелёный), падение — плохо (красный)
   const incomeDeltaTone: "gain" | "loss" | "neutral" =
     data?.incomeDeltaPercent == null ? "neutral" : data.incomeDeltaPercent >= 0 ? "gain" : "loss";
 
-  // Расходы: рост — плохо (красный), падение — хорошо (зелёный)
   const expenseDeltaTone: "gain" | "loss" | "neutral" =
     data?.expenseDeltaPercent == null ? "neutral" : data.expenseDeltaPercent > 0 ? "loss" : "gain";
 

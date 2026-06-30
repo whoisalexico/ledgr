@@ -9,7 +9,7 @@ import { convertToByn, convertFromByn } from "@/lib/exchange-rates";
 import type { SupportedCurrency } from "@/lib/currency-constants";
 
 function percentDelta(current: number, previous: number): number | null {
-  if (previous === 0) return current === 0 ? 0 : null; // нет базы для сравнения
+  if (previous === 0) return current === 0 ? 0 : null;
   return ((current - previous) / previous) * 100;
 }
 
@@ -102,8 +102,7 @@ export const createOperationFn = createServerFn({ method: "POST" })
       throw new Error("Категория не найдена");
     }
 
-    // Конвертируем сумму операции в BYN по курсу на момент совершения операции —
-    // именно эта сумма используется для баланса и статистики
+    // Конвертируем сумму операции в BYN по курсу на момент совершения операции
     const amountByn = await convertToByn(data.amount, data.currency as SupportedCurrency);
     const balanceDeltaByn = data.type === "INCOME" ? amountByn : -amountByn;
 

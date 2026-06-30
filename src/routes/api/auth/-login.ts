@@ -26,6 +26,5 @@ export const loginFn = createServerFn({ method: "POST" })
 
     await createSession(user.id);
 
-    // Возвращаем результат — редирект на клиенте
     return { success: true };
   });

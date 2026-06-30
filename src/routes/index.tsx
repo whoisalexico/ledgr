@@ -231,7 +231,6 @@ function StatCard({
 }
 
 function BalanceChart() {
-  // Simple SVG area chart
   const points = [40, 70, 55, 90, 75, 110, 95, 140, 120, 160, 145, 185];
   const max = 200;
   const w = 600;

@@ -40,7 +40,7 @@ export async function createSession(userId: string): Promise<string> {
   return session.token;
 }
 
-/** Читает текущего пользователя из cookie → БД. Возвращает null если нет/истёк */
+/** Читает текущего пользователя из cookie. Возвращает null если нет/истёк */
 export async function getCurrentUser() {
   let token: string | undefined;
 

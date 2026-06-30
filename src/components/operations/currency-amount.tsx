@@ -2,10 +2,6 @@ import { BynSign } from "@/components/icons/byn-sign";
 import { formatAmount, CURRENCY_SYMBOLS } from "@/lib/currency-format";
 import type { SupportedCurrency } from "@/lib/currency-constants";
 
-/**
- * Отображает сумму с визуально точным символом валюты.
- * Для BYN использует SVG-знак Нацбанка (буква «Б» с чертой), для остальных — обычный текст.
- */
 export function CurrencyAmount({
   amount,
   currency,

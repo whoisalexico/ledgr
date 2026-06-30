@@ -1,14 +1,14 @@
 "use server";
 
 /**
- * Получение курсов валют относительно BYN через open.er-api.com (бесплатный, без ключа).
+ * Получение курсов валют относительно BYN через open.er-api.com.
  * Курсы кэшируются в памяти процесса на CACHE_TTL_MS, чтобы не дёргать внешний API на каждый запрос.
  * Этот модуль выполняется только на сервере — fetch к внешнему API недопустим в браузере.
  */
 
 import { SUPPORTED_CURRENCIES, type SupportedCurrency } from "@/lib/currency-constants.ts";
 
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 час
+const CACHE_TTL_MS = 60 * 60 * 1000;
 
 interface RatesCache {
   rates: Record<SupportedCurrency, number>; // курс: сколько BYN за 1 единицу валюты
@@ -37,7 +37,7 @@ async function fetchRatesFromApi(): Promise<Record<SupportedCurrency, number>> {
     throw new Error("Exchange rate API вернул некорректный ответ");
   }
 
-  // API отдаёт курс "1 BYN = X валюты", нам нужно обратное: "1 валюта = X BYN"
+  // API отдаёт курс 1 BYN = X валюты, нам нужно обратное 1 валюта = X BYN
   const rates: Record<SupportedCurrency, number> = { BYN: 1 } as Record<SupportedCurrency, number>;
 
   for (const code of SUPPORTED_CURRENCIES) {
@@ -66,7 +66,6 @@ export async function getRatesToByn(): Promise<Record<SupportedCurrency, number>
     return rates;
   } catch (err) {
     console.error("[exchange-rates] Не удалось получить курсы, использую fallback:", err);
-    // Если есть старый кэш — лучше отдать его, чем грубый fallback
     if (cache) return cache.rates;
     return FALLBACK_RATES;
   }

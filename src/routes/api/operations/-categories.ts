@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
 import { createCategorySchema } from "@/lib/operation-schemas";
 
-/** Список категорий, доступных текущему пользователю: дефолтные (userId = null) + свои */
+/** Список категорий, доступных текущему пользователю: дефолтные + свои */
 export const listCategoriesFn = createServerFn({ method: "GET" }).handler(async () => {
   const user = await getCurrentUser();
   if (!user) throw new Error("Не авторизован");

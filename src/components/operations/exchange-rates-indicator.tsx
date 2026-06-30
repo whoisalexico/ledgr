@@ -10,7 +10,7 @@ export function ExchangeRatesIndicator() {
   const { data, isLoading } = useQuery({
     queryKey: ["exchange-rates"],
     queryFn: () => getExchangeRatesFn(),
-    staleTime: 60 * 60 * 1000, // 1 час, синхронно с сервером
+    staleTime: 60 * 60 * 1000,
   });
 
   const otherCurrencies = SUPPORTED_CURRENCIES.filter((c) => c !== "BYN");
